@@ -18,17 +18,6 @@ import { AppItem, Folder, resolveIconSource } from '../constants'
 
 const EDITOR_SECONDARY = 'secondaryLabel' as Color
 const EDITOR_TERTIARY = 'tertiarySystemFill' as Color
-const BACKGROUND_MESH_POINTS: [number, number][] = [
-  [0, 0],
-  [0.5, -0.05],
-  [1, 0],
-  [-0.08, 0.52],
-  [0.5, 0.42],
-  [1.08, 0.55],
-  [0, 1],
-  [0.48, 1.05],
-  [1, 1]
-]
 
 export function FolderIconView({
   icon,
@@ -204,44 +193,15 @@ function TexturedBackground() {
     <EnvironmentValuesReader keys={['colorScheme']}>
       {({ colorScheme }) => {
         const isDark = colorScheme === 'dark'
-        const background =
-          parseFloat(Device.systemVersion) >= 18
-            ? gradient('mesh', {
-                width: 3,
-                height: 3,
-                points: BACKGROUND_MESH_POINTS,
-                colors: (isDark
-                  ? [
-                      '#111C2E',
-                      '#261B32',
-                      '#102A28',
-                      '#19243A',
-                      '#2B2420',
-                      '#17243A',
-                      '#142C2A',
-                      '#231B31',
-                      '#141922'
-                    ]
-                  : [
-                      '#DCEBFF',
-                      '#F2E4FF',
-                      '#DDF6EF',
-                      '#EAF1FF',
-                      '#F8F1E7',
-                      '#E2ECFF',
-                      '#DDF2EE',
-                      '#EFE4FA',
-                      '#F4F6FA'
-                    ]) as Color[],
-                background: (isDark ? '#141922' : '#EEF2F7') as Color
-              })
-            : gradient('linear', {
-                colors: (isDark
-                  ? ['#111C2E', '#261B32', '#102A28']
-                  : ['#DCEBFF', '#F2E4FF', '#DDF6EF']) as Color[],
-                startPoint: 'topLeading',
-                endPoint: 'bottomTrailing'
-              })
+        // 原作用 mesh 渐变但 points 传了 [x,y] 元组（官方要求 {x,y} 对象），运行时解析失败渲染成黑色。
+        // 改为全版本统一的 linear 渐变，浅色三色板保持原设计。
+        const background = gradient('linear', {
+          colors: (isDark
+            ? ['#111C2E', '#261B32', '#102A28']
+            : ['#DCEBFF', '#F2E4FF', '#DDF6EF']) as Color[],
+          startPoint: 'topLeading',
+          endPoint: 'bottomTrailing'
+        })
 
         return (
           <ZStack
