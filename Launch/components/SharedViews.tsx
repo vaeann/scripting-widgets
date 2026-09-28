@@ -205,7 +205,7 @@ function TexturedBackground() {
 
         return (
           <ZStack
-            frame={{ maxWidth: 'infinity', maxHeight: 'infinity' }}
+            frame={{ maxWidth: Infinity, maxHeight: Infinity }}
             ignoresSafeArea={{ regions: 'container', edges: 'all' }}
             allowsHitTesting={false}
           >
@@ -243,7 +243,8 @@ function TexturedBackground() {
 export function TexturedTabPage({ children }: { children: VirtualNode }) {
   return (
     <ZStack
-      frame={{ maxWidth: 'infinity', maxHeight: 'infinity' }}
+      frame={{ maxWidth: Infinity, maxHeight: Infinity }}
+      background='#EEF2F7'
       toolbarBackground={{
         style: 'clear',
         bars: ['navigationBar', 'tabBar']
