@@ -333,7 +333,7 @@ function App() {
   ]
 
   return parseFloat(Device.systemVersion) >= 18 ? (
-    <TabView>
+    <TabView preferredColorScheme="light">
       {tabs.map(tab => (
         <Tab key={tab.title} title={tab.title} systemImage={tab.systemImage}>
           <NavigationStack>{tab.content}</NavigationStack>
@@ -341,7 +341,7 @@ function App() {
       ))}
     </TabView>
   ) : (
-    <TabView>
+    <TabView preferredColorScheme="light">
       {tabs.map((tab, index) => (
         <NavigationStack
           key={tab.title}

@@ -535,7 +535,7 @@ export function SearchSheet({
   const current = regionFor(region)
 
   return (
-    <NavigationStack>
+    <NavigationStack preferredColorScheme="light">
       <VStack
         spacing={0}
         frame={{ maxWidth: 'infinity', maxHeight: 'infinity', alignment: 'top' }}
